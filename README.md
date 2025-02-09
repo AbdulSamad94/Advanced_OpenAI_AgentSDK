@@ -26,10 +26,10 @@ To set up the repository on your local machine, follow these steps:
    git clone https://github.com/AbdulSamad94/Python_Learning_Phase.git
    cd your-repo
    ```
-### Contributing
+## Contributing
 Contributions are welcome! If you have ideas, suggestions, or improvements, please feel free to fork the repository and open a pull request. Alternatively, you can open an issue to discuss any changes you’d like to see.
 
-### Contact
+## Contact
 For any questions, suggestions, or feedback, please feel free to reach out:
 
 Email: abdulsamadsiddiqui2000@gmail.com
