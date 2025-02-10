@@ -1,4 +1,4 @@
-# Lists & Tuples in Python
+# Lists or Arrays in Python
 
 randomList = ["Samad", "Abdul", "Rehan", 30, 30.0897, True, False]
 print(randomList[0])
