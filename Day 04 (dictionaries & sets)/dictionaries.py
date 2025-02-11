@@ -12,6 +12,7 @@ print(" updated dictionary :", names)
 print(names.items())  # it will return all key value pair in tuple
 print(names.keys())  # it will return all keys
 print(names.values())  # it will return all values
+print(len(names))  # it will return the length of dictionary
 
 
 print(names.get("person1"))  # it will return the value of key
