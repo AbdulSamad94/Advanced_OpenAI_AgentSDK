@@ -20,10 +20,10 @@ print(names["person1"])  # it will return the value of key
 # but the difference between get and [] is that if key is not present in dictionary then get will return None but [] will give error
 
 
-# names.clear()  # it will clear the dictionary
+names.clear()  # it will clear the dictionary
 
-# names.copy()  # it will return the copy of dictionary
+names.copy()  # it will return the copy of dictionary
 
-# names.pop("person1")  # it will remove the key value pair from dictionary
+names.pop("person1")  # it will remove the key value pair from dictionary
 names.popitem()  # it will remove the last key value pair from dictionary
 print(names)

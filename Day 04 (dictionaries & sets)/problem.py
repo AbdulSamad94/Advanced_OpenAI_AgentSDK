@@ -45,9 +45,31 @@
 
 # print(set)
 
-set = {
-    18,
-    "18",
-}  # checking if 18 will be printed if they same but in different data type
+# set = {
+#     18,
+#     "18",
+# }  # checking if 18 will be printed if they same but in different data type
 
-print(set)
+# print(set)
+
+# problem 3 : write an empty dictionary, allow 4 friends to enter there favourite language as value and use there name as key, assume that the names are unique
+
+languages = {}
+
+name = input("Enter your name : ")
+takeLanguage = input("Enter your favourite language : ")
+languages[name] = takeLanguage
+
+name1 = input("Enter your name : ")
+takeLanguage1 = input("Enter your favourite language : ")
+languages[name1] = takeLanguage1
+
+name2 = input("Enter your name : ")
+takeLanguage2 = input("Enter your favourite language : ")
+languages[name2] = takeLanguage2
+
+name3 = input("Enter your name : ")
+takeLanguage3 = input("Enter your favourite language : ")
+languages[name3] = takeLanguage3
+
+print(languages)
