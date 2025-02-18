@@ -5,7 +5,6 @@ from agents import (
     InputGuardrailTripwireTriggered,
     OutputGuardrailTripwireTriggered,
     ModelSettings,
-    ReasoningItem,
 )
 from openai.types.shared import Reasoning
 import asyncio
