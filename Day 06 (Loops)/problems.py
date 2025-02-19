@@ -113,7 +113,8 @@ for i in range(1, (n + 1)):
 """
 
 
-n = int(input("Enter your number: "))
+# n = int(input("Enter your number: "))
+n: int = input("Enter your number")
 
 for i in range(1, n + 1):
     if i != 1 and i != n:
