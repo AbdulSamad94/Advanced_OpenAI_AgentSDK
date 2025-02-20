@@ -14,7 +14,7 @@ import random
 
 random = random.randint(1, 100)
 
-with open("write.txt") as file:
+with open("write.txt", "") as file:
     prevHighScore = file.read()
 
 
