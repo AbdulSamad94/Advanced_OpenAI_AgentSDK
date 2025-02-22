@@ -45,3 +45,6 @@ print(my_person.lastname)
 # even we can inherit methods
 
 print(my_person.full_name())
+
+# in this Person_Detail class we have inherited the methods from FullName class
+# and we have added a new attribute battery_capacity
