@@ -1,4 +1,37 @@
 # inheritance in oop
+
+
+class Car_one:
+    name = "BMW"
+    model = "m3"
+
+
+class Car_two(Car_one):
+    name_two = "Mercedes-Benz"
+    model_two = "G"
+
+
+class Car_three(Car_two):
+    name_three = "Audi"
+    model_three = "A4"
+
+
+# cars = Car_one()
+# print(cars.name, cars.model, cars.name_two)  ------> it will give error as they are not in the same class
+
+# we can inherit multiple classes
+
+cars = Car_three()
+print(
+    cars.name_three, cars.model
+)  # -------> in this we are getting multiple classes atribute from the class we inherited
+
+
+# super in inheritance
+
+# we use super to access the __init__ method of the parent class
+
+
 class FullName:
     def __init__(self, firstname, lastname):
         self.firstname = firstname
