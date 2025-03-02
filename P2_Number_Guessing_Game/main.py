@@ -2,7 +2,7 @@ import random
 
 
 def game():
-    random_Number = random.randint(1, 10)
+    random_Number = random.randint(1, 100)
     total_Guesses = 1
 
     print("\nWelcome to the Number Guessing Game!\n")
