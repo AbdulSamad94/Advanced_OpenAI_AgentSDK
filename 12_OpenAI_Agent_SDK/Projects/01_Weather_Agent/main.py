@@ -1,6 +1,12 @@
 import os
 import chainlit as cl
-from agents import Agent, Runner, AsyncOpenAI, OpenAIChatCompletionsModel
+from agents import (
+    Agent,
+    Runner,
+    AsyncOpenAI,
+    OpenAIChatCompletionsModel,
+    RunContextWrapper,
+)
 from agents.run import RunConfig
 from agents.tool import function_tool
 from dotenv import load_dotenv
@@ -61,7 +67,7 @@ async def start():
 
     cl.user_session.set("config", config)
     agent: Agent = Agent(
-        name="Assistant",
+        name="Best Agent",
         instructions="You are a helpful assistant.",
         model=model,
     )
