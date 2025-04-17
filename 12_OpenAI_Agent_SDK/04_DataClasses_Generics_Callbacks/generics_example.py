@@ -16,6 +16,7 @@ strings = ["a", "b", "c"]
 from typing import TypeVar, List
 
 # Type variable for generic typing
+
 T = TypeVar("T")
 
 
