@@ -131,14 +131,22 @@ name = "app"
 version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
+    { name = "asyncio" },
     { name = "chainlit" },
     { name = "click" },
+    { name = "openai-agents" },
+    { name = "python-dotenv" },
+    { name = "requests" },
 ]
 
 [package.metadata]
 requires-dist = [
+    { name = "asyncio", specifier = ">=3.4.3" },
     { name = "chainlit", specifier = ">=2.4.400" },
     { name = "click", specifier = ">=8.1.8" },
+    { name = "openai-agents", specifier = ">=0.0.11" },
+    { name = "python-dotenv", specifier = ">=1.1.0" },
+    { name = "requests", specifier = ">=2.32.3" },
 ]
 
 [[package]]
@@ -151,6 +159,15 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/39/29/245ba9fa5769a1e3226c1157aedb372fe9dab28c4e1dcf6911d84d3a5e04/asyncer-0.0.7.tar.gz", hash = "sha256:d5e563fb0f56eb87b97257984703658a4f5bbdb52ff851b3e8ed864cc200b1d2", size = 14437 }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/3e/4b/40a1dc52fc26695b1e80a9e67dfb0fe7e6ddc57bbc5b61348e40c0045abb/asyncer-0.0.7-py3-none-any.whl", hash = "sha256:f0d579d4f67c4ead52ede3a45c854f462cae569058a8a6a68a4ebccac1c335d8", size = 8476 },
+]
+
+[[package]]
+name = "asyncio"
+version = "3.4.3"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/da/54/054bafaf2c0fb8473d423743e191fcdf49b2c1fd5e9af3524efbe097bafd/asyncio-3.4.3.tar.gz", hash = "sha256:83360ff8bc97980e4ff25c964c7bd3923d333d177aa4f7fb736b019f26c7cb41", size = 204411 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/22/74/07679c5b9f98a7cb0fc147b1ef1cc1853bc07a4eb9cb5731e24732c5f773/asyncio-3.4.3-py3-none-any.whl", hash = "sha256:c4d18b22701821de07bd6aea8b53d21449ec0ec5680645e5317062ea21817d2d", size = 101767 },
 ]
 
 [[package]]
@@ -412,6 +429,18 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/1b/d7/ee9d56af4e6dbe958562b5020f46263c8a4628e7952070241fc0e9b182ae/googleapis_common_protos-1.69.2.tar.gz", hash = "sha256:3e1b904a27a33c821b4b749fd31d334c0c9c30e6113023d495e48979a3dc9c5f", size = 144496 }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/f9/53/d35476d547a286506f0a6a634ccf1e5d288fffd53d48f0bd5fef61d68684/googleapis_common_protos-1.69.2-py3-none-any.whl", hash = "sha256:0b30452ff9c7a27d80bfc5718954063e8ab53dd3697093d3bc99581f5fd24212", size = 293215 },
+]
+
+[[package]]
+name = "griffe"
+version = "1.7.2"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "colorama" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/59/08/7df7e90e34d08ad890bd71d7ba19451052f88dc3d2c483d228d1331a4736/griffe-1.7.2.tar.gz", hash = "sha256:98d396d803fab3b680c2608f300872fd57019ed82f0672f5b5323a9ad18c540c", size = 394919 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/b1/5e/38b408f41064c9fcdbb0ea27c1bd13a1c8657c4846e04dab9f5ea770602c/griffe-1.7.2-py3-none-any.whl", hash = "sha256:1ed9c2e338a75741fc82083fe5a1bc89cb6142efe126194cc313e34ee6af5423", size = 129187 },
 ]
 
 [[package]]
@@ -753,6 +782,43 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/83/f8/51569ac65d696c8ecbee95938f89d4abf00f47d58d48f6fbabfe8f0baefe/nest_asyncio-1.6.0.tar.gz", hash = "sha256:6f172d5449aca15afd6c646851f4e31e02c598d553a667e38cafa997cfec55fe", size = 7418 }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/a0/c4/c2971a3ba4c6103a3d10c4b0f24f461ddc027f0f09763220cf35ca1401b3/nest_asyncio-1.6.0-py3-none-any.whl", hash = "sha256:87af6efd6b5e897c81050477ef65c62e2b2f35d51703cae01aff2905b1852e1c", size = 5195 },
+]
+
+[[package]]
+name = "openai"
+version = "1.75.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "anyio" },
+    { name = "distro" },
+    { name = "httpx" },
+    { name = "jiter" },
+    { name = "pydantic" },
+    { name = "sniffio" },
+    { name = "tqdm" },
+    { name = "typing-extensions" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/99/b1/318f5d4c482f19c5fcbcde190801bfaaaec23413cda0b88a29f6897448ff/openai-1.75.0.tar.gz", hash = "sha256:fb3ea907efbdb1bcfd0c44507ad9c961afd7dce3147292b54505ecfd17be8fd1", size = 429492 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/80/9a/f34f163294345f123673ed03e77c33dee2534f3ac1f9d18120384457304d/openai-1.75.0-py3-none-any.whl", hash = "sha256:fe6f932d2ded3b429ff67cc9ad118c71327db32eb9d32dd723de3acfca337125", size = 646972 },
+]
+
+[[package]]
+name = "openai-agents"
+version = "0.0.11"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "griffe" },
+    { name = "mcp" },
+    { name = "openai" },
+    { name = "pydantic" },
+    { name = "requests" },
+    { name = "types-requests" },
+    { name = "typing-extensions" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/33/49/47f8e9d72b33b80f619d7fc2d7c584a9e3a564d81b53382dbb39433d3680/openai_agents-0.0.11.tar.gz", hash = "sha256:0a2c2bb4e0a8ad023ee7d7c6341f7800f7fe9edeb2ecac9514fff8badb2fea3d", size = 1023401 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/58/fe/471cec9810db80d4c6d05b085e5233f2aeb8d61da90935a6176b8ad8a10e/openai_agents-0.0.11-py3-none-any.whl", hash = "sha256:f2c7217019c987f3d3eb2455a9ff553e25ffeddd930bc169100e8527c30750a2", size = 108253 },
 ]
 
 [[package]]
@@ -1891,6 +1957,18 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/b9/74/487aa6e25bc5e7a8873da7c4dffed12cf706b61ad27b85ae4d23befe87a3/traceloop_sdk-0.39.0.tar.gz", hash = "sha256:c49368f031f5ec96aacedd0ffdb0e27996d723c4d9de6c65576b76beb7a25a91", size = 21725 }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/c1/36/8d25d4ef30d7c9b11c24ffe96a7ccc7f538a11af14fad8ffe24280e1f324/traceloop_sdk-0.39.0-py3-none-any.whl", hash = "sha256:2b396b80b4b4c921b0b6ee533353b0846e5ced8d0afaa33aeae53194f8d9f308", size = 30948 },
+]
+
+[[package]]
+name = "types-requests"
+version = "2.32.0.20250328"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "urllib3" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/00/7d/eb174f74e3f5634eaacb38031bbe467dfe2e545bc255e5c90096ec46bc46/types_requests-2.32.0.20250328.tar.gz", hash = "sha256:c9e67228ea103bd811c96984fac36ed2ae8da87a36a633964a21f199d60baf32", size = 22995 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/cc/15/3700282a9d4ea3b37044264d3e4d1b1f0095a4ebf860a99914fd544e3be3/types_requests-2.32.0.20250328-py3-none-any.whl", hash = "sha256:72ff80f84b15eb3aa7a8e2625fffb6a93f2ad5a0c20215fc1dcfa61117bcb2a2", size = 20663 },
 ]
 
 [[package]]
