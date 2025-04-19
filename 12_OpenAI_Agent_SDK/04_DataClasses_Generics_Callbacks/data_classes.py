@@ -23,6 +23,8 @@ class Person:
     name: str
     age: int
 
+    
+
 
 output = Person("John Doe", 30)
 print(output.name, output.age)
