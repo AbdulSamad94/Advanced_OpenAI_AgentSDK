@@ -15,7 +15,7 @@ from dataclasses import dataclass, field
 # output = Person("John Doe", 30)
 # print(output.name, output.age)
 
-# The same thing can be done with dataclasses, which will make this work much easier to read and maintain.
+# The same thing can be done with dataclasses, which will make  this work much easier to read and maintain.
 
 
 @dataclass
