@@ -29,6 +29,7 @@ def get_weather(city: str) -> str:
     """
     Fetches the current weather for a given city.
 
+
     Args:
         city: The name of the city.
 
