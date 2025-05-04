@@ -25,5 +25,6 @@ example_input = {
     "salary": 1200000,
 }
 
+
 employee = Employee(**example_input)
 print(employee)
