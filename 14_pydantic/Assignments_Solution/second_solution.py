@@ -24,7 +24,5 @@ example_input = {
     "department": "General",
     "salary": 1200000,
 }
-
-
 employee = Employee(**example_input)
 print(employee)
