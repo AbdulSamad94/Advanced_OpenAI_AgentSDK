@@ -1,9 +1,9 @@
-from pydantic import BaseModel  # type: ignore
+from pydantic import BaseModel, Field  # type: ignore
 from typing import List, Dict, Optional
 
 
 class Cart(BaseModel):
-    user_id: int
+    user_id: int = Field(..., gt=0, description="User ID")
     items: List[str]
     quantities: Dict[str, int]
 
