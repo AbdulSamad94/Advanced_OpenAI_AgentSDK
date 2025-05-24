@@ -5,7 +5,6 @@ from agents import (
     Runner,
     AsyncOpenAI,
     OpenAIChatCompletionsModel,
-    RunContextWrapper,
 )
 from agents.run import RunConfig
 from agents.tool import function_tool
