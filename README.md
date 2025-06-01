@@ -1,4 +1,4 @@
-# 📚 Advanced OpenAI Agent SDK and Python Learning Repository
+# 📚 OpenAI Agent SDK and Advanced Python Learning Repository
 
 ## 🧠 About
 
