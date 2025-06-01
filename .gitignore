@@ -1,0 +1,56 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg
+*.egg-info/
+dist/
+build/
+env/
+venv/
+ENV/
+.venv/
+.Python
+
+# VSCode
+.vscode/
+
+# macOS
+.DS_Store
+
+# Jupyter Notebooks
+.ipynb_checkpoints/
+
+# Logs and debug
+*.log
+*.pot
+*.pyc
+
+# Environment variables
+.env
+.env.*
+
+# Agent SDK related
+.openai/
+openai_logs/
+agent_runs/
+.traces/
+*.sqlite3
+
+# Byte-compiled / optimized / DLL files
+*.pyo
+*.pyd
+*.so
+
+# Testing
+htmlcov/
+.coverage
+.tox/
+.cache/
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+
+# System Files
+Thumbs.db
+desktop.ini
