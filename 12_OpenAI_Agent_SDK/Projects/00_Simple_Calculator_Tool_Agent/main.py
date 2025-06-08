@@ -54,7 +54,7 @@ model = OpenAIChatCompletionsModel(
 
 
 async def main():
-    user_input = input("Enter a mathematical expression (e.g., 'add 2 3'): ")
+    user_input = input("Enter a mathematical expression (e.g, 'add 2 3'): ")
     if not user_input:
         print("No input provided. Exiting.")
         return
