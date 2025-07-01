@@ -18,10 +18,9 @@ if not GEMINI_API_KEY:
     raise ValueError("GEMINI_API_KEY is not set. Please set it in the .env file.")
 
 # Define the model name
-MODEL = "gemini-2.0-flash"
+MODEL = "gemini/gemini-2.0-flash"
 
 
-# Define the function tool
 @function_tool
 def get_weather(city: str) -> str:
     print(f"[debug] getting weather for {city}")
