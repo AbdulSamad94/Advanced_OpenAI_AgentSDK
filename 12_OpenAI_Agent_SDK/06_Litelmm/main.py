@@ -30,7 +30,7 @@ def get_weather(city: str) -> str:
 # Main asynchronous function
 async def main(model: str, api_key: str):
     try:
-     agent = Agent(
+        agent = Agent(
             name="Assistant",
             instructions="You only respond in English.",
             model=LitellmModel(model=model, api_key=api_key),
