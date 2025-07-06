@@ -4,9 +4,9 @@ from agents import (
     Runner,
     RunConfig,
     GuardrailFunctionOutput,
-    InputGuardrailTripwireTriggered,
+    OutputGuardrailTripwireTriggered,
     RunContextWrapper,
-    input_guardrail,
+    output_guardrail,
     TResponseInputItem,
 )
 from pydantic import BaseModel
@@ -22,9 +22,13 @@ if not GEMINI_API_KEY:
     raise ValueError("GEMINI_API_KEY environment variable is not set.")
 
 
-class MathHomeworkOutput(BaseModel):
-    is_math_homework: bool
+class MessageOutput(BaseModel):
+    response: str
+
+
+class MathOutput(BaseModel):
     reasoning: str
+    is_math: bool
 
 
 async def main():
@@ -39,26 +43,26 @@ async def main():
     guardrail_agent = Agent(
         name="Guardrail check",
         instructions="Check if the user is asking you to do their math homework.",
-        output_type=MathHomeworkOutput,
+        output_type=MathOutput,
         model=model,
     )
 
-    @input_guardrail
+    @output_guardrail
     async def math_guardrail(
-        ctx: RunContextWrapper[None],
-        input: str | list[TResponseInputItem],
+        ctx: RunContextWrapper, agent: Agent, output: MessageOutput
     ) -> GuardrailFunctionOutput:
-        result = await Runner.run(guardrail_agent, input, context=ctx.context)
+        result = await Runner.run(guardrail_agent, output.response, context=ctx.context)
 
         return GuardrailFunctionOutput(
             output_info=result.final_output,
-            tripwire_triggered=result.final_output.is_math_homework,
+            tripwire_triggered=result.final_output.is_math,
         )
 
     agent = Agent(
         name="Customer support agent",
         instructions="You are a customer support agent. You help customers with their questions.",
-        input_guardrails=[math_guardrail],
+        output_guardrails=[math_guardrail],
+        output_type=MessageOutput,
         model=model,
     )
     history = []
@@ -70,12 +74,13 @@ async def main():
         history.append({"role": "user", "content": user_input})
         try:
             result = await Runner.run(agent, history, run_config=config)
-            history.append({"role": "assistant", "content": result.final_output})
-            print(f"Assistant: {result.final_output}")
+            history.append(
+                {"role": "assistant", "content": result.final_output.response}
+            )
+            print(f"Assistant: {result.final_output.response}")
             print("Guardrail didn't trip - this is unexpected")
-        except InputGuardrailTripwireTriggered as e:
-            print("Math homework guardrail tripped")
-            print("Math homework guardrail tripped")
+        except OutputGuardrailTripwireTriggered:
+            print("Math output guardrail tripped")
 
 
 if __name__ == "__main__":
