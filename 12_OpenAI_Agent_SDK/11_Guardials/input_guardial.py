@@ -33,7 +33,7 @@ async def main():
         base_url="https://generativelanguage.googleapis.com/v1beta/openai/",
     )
 
-    model = OpenAIChatCompletionsModel(openai_client=client, model="gemini-2.0-flash")
+    model = OpenAIChatCompletionsModel(openai_client=client, model="gemini-2.5-flash")
     config = RunConfig(tracing_disabled=True, model=model, model_provider=client)
 
     guardrail_agent = Agent(
