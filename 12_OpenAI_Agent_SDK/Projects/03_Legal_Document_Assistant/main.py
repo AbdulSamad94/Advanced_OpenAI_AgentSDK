@@ -11,6 +11,7 @@ from agents import (
     InputGuardrailTripwireTriggered,
     OutputGuardrailTripwireTriggered,
     OpenAIChatCompletionsModel,
+    ModelSettings,
 )
 from openai import AsyncOpenAI
 from dotenv import load_dotenv
@@ -26,6 +27,7 @@ from pydantic_models import (
     SharedContext,
     SensitiveCheckOutput,
     DocumentCheckOutput,
+    AgentDecision,
 )
 from agent_instructions import (
     analysis_agent_instruction,
@@ -204,47 +206,6 @@ async def friendly_message_validation_guardrail(
     )
 
 
-# @function_tool
-# async def analyze_document_full(document: str) -> dict:
-#     """
-#     Analyze a legal document in 3 steps and return a structured JSON response.
-
-#     Steps to follow:
-#     1. Summarize the document using legal summarizer.
-#     2. Detect risky or unclear clauses.
-#     3. Judge if clauses are fair/risky and return a short verdict.
-
-#     Combine all 3 results into the following JSON format:
-
-#     {
-#       "summary": string,
-#       "risks": list of strings,
-#       "verdict": string,
-#       "disclaimer": "This summary is for informational purposes only and does not constitute legal advice."
-#     }
-
-#     All steps are required. Do not skip any.
-#     """
-
-#     config = RunConfig(model=model, model_provider=client)
-
-#     summary_res = await Runner.run(summarizer_agent, document, run_config=config)
-#     summary = summary_res.final_output.summary
-
-#     risks_res = await Runner.run(risk_detector_agent, document, run_config=config)
-#     risks = risks_res.final_output.risks
-
-#     clause_res = await Runner.run(clause_checker_agent, document, run_config=config)
-#     verdict = (
-#         clause_res.final_output
-#         if isinstance(clause_res.final_output, str)
-#         else str(clause_res.final_output)
-#     )
-
-#     final = FinalOutput(summary=summary, risks=risks, verdict=verdict)
-#     return final.model_dump()
-
-
 analysis_agent = Agent(
     name="LegalAnalysisAgent",
     instructions=analysis_agent_instruction,
@@ -255,15 +216,15 @@ analysis_agent = Agent(
     tools=[
         summarizer_agent.as_tool(
             tool_name="summarize_document",
-            tool_description="Summarize the legal document in clear English.",
+            tool_description=summarizer_agent_instructions,
         ),
         risk_detector_agent.as_tool(
             tool_name="detect_risks",
-            tool_description="Identify risky or problematic clauses.",
+            tool_description=risk_agent_instructions,
         ),
         clause_checker_agent.as_tool(
             tool_name="check_clause",
-            tool_description="Check if clauses are legally acceptable.",
+            tool_description=clause_agent_instructions,
         ),
     ],
 )
@@ -292,23 +253,10 @@ main_agent = Agent(
     tools=[
         document_detector_agent.as_tool(
             tool_name="detect_document_type",
-            tool_description="Check if input is a legal document or casual conversation.",
-        ),
-        analysis_agent.as_tool(
-            tool_name="analyze_document_agent",
-            tool_description="Analyze legal document with full validation.",
-        ),
-        friendly_agent.as_tool(
-            tool_name="make_friendly",
-            tool_description="Convert JSON analysis to friendly message.",
-        ),
-        casual_chat_agent.as_tool(
-            tool_name="casual_chat",
-            tool_description="Handle casual conversation and general questions.",
-        ),
+            tool_description=document_detector_agent_instructions,
+        )
     ],
-    output_type=FriendlyMessage,
-    output_guardrails=[friendly_message_validation_guardrail],
+    output_type=AgentDecision,
 )
 
 
@@ -328,12 +276,35 @@ async def main():
         try:
             context = SharedContext(document_text=user_input, analysis_stage="starting")
 
-            print("\n🤖 Processing with Main Agent...")
-            result = await Runner.run(
+            print("\n🤖 Processing with Main Agent (Decision Phase)......")
+            decision_result = await Runner.run(
                 main_agent, user_input, run_config=config, context=context
             )
 
-            print(f"\n💬 Response: {result.final_output.message}")
+            decision: AgentDecision = decision_result.final_output
+
+            final_response_message = ""
+            if decision.action == "analyze_document":
+                print("\n➡️ Document detected, proceeding to analysis...")
+                analysis_output = await Runner.run(
+                    analysis_agent, decision.document_content, run_config=config
+                )
+                friendly_output = await Runner.run(
+                    friendly_agent,
+                    analysis_output.final_output.json(),
+                    run_config=config,
+                )
+                final_response_message = friendly_output.final_output.message
+            elif decision.action == "casual_chat":
+                print("\n➡️ Casual chat mode activated...")
+                casual_output = await Runner.run(
+                    casual_chat_agent, user_input, run_config=config
+                )
+                final_response_message = casual_output.final_output.message
+            else:
+                final_response_message = "I couldn't determine if that was a document. Please provide a clear legal document or ask a general question."
+
+            print(f"\n💬 Response: {final_response_message}")
         except InputGuardrailTripwireTriggered as e:
             SimpleLogger.log("🛑 INPUT GUARDRAIL TRIGGERED", str(e))
             print(f"Input blocked: {e.message}")

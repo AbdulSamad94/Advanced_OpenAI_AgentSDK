@@ -1,4 +1,5 @@
 from pydantic import BaseModel
+from typing import Literal, Union
 
 
 class SensitiveCheckOutput(BaseModel):
@@ -37,3 +38,9 @@ class DocumentCheckOutput(BaseModel):
     is_legal_document: bool
     document_type: str
     reasoning: str
+
+
+class AgentDecision(BaseModel):
+    action: Literal["analyze_document", "casual_chat", "no_document_found"]
+    reasoning: str = ""
+    document_content: str | None = None
