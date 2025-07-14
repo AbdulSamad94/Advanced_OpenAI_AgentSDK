@@ -37,7 +37,7 @@ from guardrails import (
 )
 from Logger import SimpleLogger
 
-# logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig(level=logging.DEBUG)
 
 analysis_agent = Agent(
     name="LegalAnalysisAgent",

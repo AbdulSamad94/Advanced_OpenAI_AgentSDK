@@ -1,4 +1,3 @@
-from __future__ import annotations
 import asyncio
 import os
 from dotenv import load_dotenv
@@ -18,7 +17,7 @@ if not GEMINI_API_KEY:
     raise ValueError("GEMINI_API_KEY is not set. Please set it in the .env file.")
 
 # Define the model name
-MODEL = "gemini/gemini-2.0-flash"
+MODEL = "gemini/gemini-1.5-flash"
 
 
 @function_tool
