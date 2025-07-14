@@ -3,16 +3,19 @@ from openai import AsyncOpenAI
 from agents import Agent, OpenAIChatCompletionsModel, Runner, set_tracing_disabled
 import os
 from dotenv import load_dotenv
+import logging
+
+logging.basicConfig(level=logging.DEBUG)
 
 load_dotenv()
 
 
-OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY")
+OPEN_ROUTER_KEY = os.getenv("OPEN_ROUTER_KEY")
 
 BASE_URL = "https://openrouter.ai/api/v1"
-MODEL = "mistralai/mistral-small-24b-instruct-2501:free"
+MODEL = "deepseek/deepseek-chat-v3-0324:free"
 
-client = AsyncOpenAI(api_key=OPENROUTER_API_KEY, base_url=BASE_URL)
+client = AsyncOpenAI(api_key=OPEN_ROUTER_KEY, base_url=BASE_URL)
 
 set_tracing_disabled(disabled=True)
 

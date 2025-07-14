@@ -7,7 +7,10 @@ from agents import (
     function_tool,
 )
 from dotenv import load_dotenv
+import logging
 import os
+
+logging.basicConfig(level=logging.DEBUG)
 
 set_tracing_disabled(disabled=True)
 load_dotenv()
