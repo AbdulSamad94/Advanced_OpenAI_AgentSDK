@@ -3,6 +3,7 @@ from openai import AsyncOpenAI
 from dotenv import load_dotenv
 import asyncio
 import os
+from rich import print
 
 load_dotenv()
 
@@ -24,21 +25,39 @@ async def main():
         model=model,
     )
 
-    session2 = SQLiteSession("conversation_123", "conversation.db")
+    session = SQLiteSession("conversation_123", "conversation.db")
 
     # First turn
     result = await Runner.run(
-        agent, "What city is the Golden Gate Bridge in?", session=session2
+        agent,
+        "What city is the Golden Gate Bridge in?",
+        session=session,
+        run_config=config,
     )
     print(result.final_output)  # "San Francisco"
 
     # Second turn - agent automatically remembers previous context
-    result = await Runner.run(agent, "What state is it in?", session=session2)
+    result = await Runner.run(
+        agent, "What state is it in?", session=session, run_config=config
+    )
     print(result.final_output)  # "California"
 
     # Also works with synchronous runner
-    result = Runner.run_sync(agent, "What's the population?", session=session2)
-    print(result.final_output)  # "Approximately 39 million"
+    result = await Runner.run(
+        agent, "What's the population?", session=session, run_config=config
+    )
+    print(result.final_output)
+
+    result = await Runner.run(
+        agent,
+        "What was the last message of yours and mine?",
+        session=session,
+        run_config=config,
+    )
+    print(result.final_output)
+
+    items = await session.get_items()
+    print(items)
 
 
 if __name__ == "__main__":
