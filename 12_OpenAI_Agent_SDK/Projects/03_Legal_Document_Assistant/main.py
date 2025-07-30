@@ -6,7 +6,7 @@ from agents import (
     OutputGuardrailTripwireTriggered,
     ModelSettings,
 )
-from openai.types.shared import Reasoning
+from agents.extensions.visualization import draw_graph
 import asyncio
 import logging
 from pydantic_models import (
@@ -66,7 +66,7 @@ main_agent = Agent(
     name="MainLegalAgent",
     instructions=main_agent_instruction,
     model=model,
-    model_settings=ModelSettings(temperature=0.1, reasoning=Reasoning(effort="high")),
+    model_settings=ModelSettings(temperature=0.1),
     input_guardrails=[sensitive_input_guardrail],
     tools=[
         document_detector_agent.as_tool(
@@ -96,10 +96,7 @@ async def main():
 
             print("\n🤖 Processing with Main Agent (Decision Phase)......")
             decision_result = await Runner.run(
-                main_agent,
-                user_input,
-                run_config=config,
-                context=context,
+                main_agent, user_input, run_config=config, context=context
             )
 
             decision: AgentDecision = decision_result.final_output

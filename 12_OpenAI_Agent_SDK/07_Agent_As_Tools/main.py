@@ -1,9 +1,11 @@
-from agents import Agent, Runner, OpenAIChatCompletionsModel, RunConfig
+from agents import Agent, Runner, OpenAIChatCompletionsModel, RunConfig, function_tool
 from openai import AsyncOpenAI
 from dotenv import load_dotenv
 import os
 import asyncio
+import logging
 
+logging.basicConfig(level=logging.DEBUG)
 load_dotenv()
 
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
@@ -35,6 +37,10 @@ async def main():
         model=model,
     )
 
+    @function_tool
+    async def translate_to_spanish(text: str) -> str:
+        result = await Runner.run(spanish_agent, text)
+        return result.final_output
 
     main_agent = Agent(
         name="main_agent",
@@ -44,10 +50,11 @@ async def main():
         ),
         model=model,
         tools=[
-            spanish_agent.as_tool(
-                tool_name="translate_to_spanish",
-                tool_description="Translate the user's message to Spanish",
-            ),
+            # spanish_agent.as_tool(
+            #     tool_name="translate_to_spanish",
+            #     tool_description="Translate the user's message to Spanish",
+            # ),
+            translate_to_spanish,
             french_agent.as_tool(
                 tool_name="translate_to_french",
                 tool_description="Translate the user's message to French",

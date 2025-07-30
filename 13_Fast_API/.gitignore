@@ -1,0 +1,58 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg
+*.egg-info/
+*.log
+
+# Virtual environments
+venv/
+.env/
+.venv/
+ENV/
+env/
+*.env
+
+# Editor folders
+.vscode/
+.idea/
+*.swp
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# Pytest cache
+.pytest_cache/
+
+# Uvicorn log files (if any)
+*.pid
+
+# Jupyter (if used in future)
+.ipynb_checkpoints/
+
+# MyPy / Pylint
+.mypy_cache/
+.pylint.d/
+
+# Build artifacts
+build/
+dist/
+*.spec
+*.tar.gz
+*.egg-info/
+
+# Coverage reports
+htmlcov/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+
+# Docker (if used)
+*.db
+docker-compose.override.yml
